@@ -32,11 +32,15 @@ span,
 em,
 i,
 a {
-    font: normal 16px/100% 'Noto Sans KR', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
     line-height: 1.5em;
     color: #333;
     letter-spacing: -1px;
     -webkit-text-size-adjust: none;
+}
+
+body {
+    font-size: 16px;
 }
 
 dl,
@@ -45,6 +49,13 @@ ol,
 li {
     list-style: none;
 }
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 
 iframe {
     margin: 0;

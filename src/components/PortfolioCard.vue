@@ -3,6 +3,10 @@ defineProps({
   item: {
     type: Object,
     required: true
+  },
+  animationDelay: {
+    type: Number,
+    default: 0
   }
 })
 
@@ -15,7 +19,7 @@ const statusColor = (status) => {
 </script>
 
 <template>
-  <article class="card">
+  <article class="card" data-aos="fade-up" :data-aos-delay="animationDelay">
     <!-- Thumbnail -->
     <div class="card__thumb" :class="{ 'no-image': !item.bgImage }">
       <img v-if="item.bgImage" :src="item.bgImage" :alt="item.title" />
@@ -74,26 +78,27 @@ const statusColor = (status) => {
 <style scoped>
 .card {
   background: #fff;
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  box-shadow: 0 8px 26px rgba(40, 48, 89, 0.07);
   display: flex;
   flex-direction: column;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  border: 1px solid #f0f0f0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  border: 1px solid #e9ebf3;
 }
 
 .card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.13);
+  transform: translateY(-7px);
+  box-shadow: 0 18px 38px rgba(40, 48, 89, 0.13);
+  border-color: #d9d7ff;
 }
 
 /* Thumbnail */
 .card__thumb {
   width: 100%;
-  height: 180px;
+  height: 190px;
   overflow: hidden;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  background: linear-gradient(135deg, #e8eaff 0%, #f0edff 52%, #e6f4ff 100%);
   flex-shrink: 0;
 }
 
@@ -101,7 +106,7 @@ const statusColor = (status) => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top;
+  object-position: center;
   transition: transform 0.6s ease;
 }
 
@@ -120,17 +125,17 @@ const statusColor = (status) => {
 .card__placeholder span {
   font-size: 52px;
   font-weight: 700;
-  color: rgba(255,255,255,0.15);
+  color: rgba(92, 91, 160, 0.22);
   letter-spacing: 0;
   font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
 }
 
 /* Body */
 .card__body {
-  padding: 20px 22px 22px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 18px;
   flex: 1;
 }
 
@@ -139,142 +144,179 @@ const statusColor = (status) => {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 10px;
+  gap: 12px;
+}
+
+.card__header > div {
+  min-width: 0;
 }
 
 .card__title {
-  font-size: 17px;
-  font-weight: 700;
-  color: #111;
-  line-height: 1.3;
-  letter-spacing: -0.4px;
+  font-size: 18px;
+  font-weight: 750;
+  color: #202640;
+  line-height: 1.4;
+  letter-spacing: -0.5px;
   font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
 }
 
 .card__subtitle {
-  margin-top: 3px;
-  font-size: 12px;
-  color: #888;
-  line-height: 1.4;
-  letter-spacing: -0.2px;
+  margin-top: 5px;
+  font-size: 12.5px;
+  color: #858b9d;
+  line-height: 1.5;
+  letter-spacing: 0;
 }
 
 /* Status Badge */
 .card__status {
   flex-shrink: 0;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 9px;
-  border-radius: 20px;
+  font-size: 10.5px;
+  font-weight: 650;
+  padding: 5px 10px;
+  border-radius: 8px;
   letter-spacing: 0;
   white-space: nowrap;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 .card__status.active {
   background: #e6f7f1;
-  color: #0a8a5a;
+  color: #258568;
 }
 
 .card__status.building {
   background: #fff4e0;
-  color: #c07000;
+  color: #a56b13;
 }
 
 .card__status.closed {
   background: #f0f0f0;
-  color: #888;
+  color: #858b9d;
 }
 
 .card__status.default {
   background: #eef2ff;
-  color: #5865f2;
+  color: #625bd4;
 }
 
 /* Meta */
 .card__meta {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
+  margin: 0;
+  padding: 14px 15px;
+  border: 1px solid #eef0f6;
+  border-radius: 12px;
+  background: #fafbfe;
+  list-style: none;
 }
 
 .card__meta li {
   display: flex;
   align-items: center;
-  gap: 7px;
-  font-size: 12.5px;
-  color: #555;
-  line-height: 1.4;
+  gap: 10px;
+  font-size: 12px;
+  color: #626a7d;
+  line-height: 1.5;
+  letter-spacing: 0;
 }
 
 .card__meta li svg {
-  width: 14px;
-  height: 14px;
+  box-sizing: content-box;
+  width: 15px;
+  height: 15px;
+  padding: 5px;
   flex-shrink: 0;
-  color: #aaa;
+  color: #7169d5;
+  background: #efefff;
+  border-radius: 8px;
 }
 
 /* Skills */
 .card__skills {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 7px;
 }
 
 .skill-tag {
-  font-size: 11px;
-  font-weight: 500;
-  color: #5865f2;
-  background: #eef2ff;
-  padding: 3px 9px;
+  font-size: 10.5px;
+  font-weight: 550;
+  color: #5e59ad;
+  background: #f4f3ff;
+  border: 1px solid #ebeaff;
+  padding: 4px 9px;
   border-radius: 6px;
   letter-spacing: 0;
+  line-height: 1.4;
 }
 
 /* Achievements */
 .card__achievements {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding-top: 2px;
-  border-top: 1px solid #f0f0f0;
+  gap: 7px;
+  margin: 0;
+  padding: 15px 16px;
+  border-top: 1px solid #edf0f5;
+  border-radius: 12px;
+  background: #fff;
+  list-style: none;
 }
 
 .card__achievements li {
   font-size: 12px;
-  color: #666;
-  padding-left: 10px;
+  color: #687084;
+  padding-left: 12px;
   position: relative;
-  line-height: 1.6;
+  line-height: 1.55;
+  letter-spacing: 0;
 }
 
 .card__achievements li::before {
-  content: '·';
+  content: '';
   position: absolute;
-  left: 0;
-  color: #bbb;
+  left: 1px;
+  top: 0.62em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #aaa5e8;
 }
 
 /* Link */
 .card__link {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: #5865f2;
+  align-self: flex-start;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 650;
+  color: #625bd4;
   margin-top: auto;
-  padding-top: 4px;
-  transition: gap 0.2s ease;
+  padding: 8px 11px;
+  border-radius: 8px;
+  background: #f4f3ff;
+  transition: gap 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 
 .card__link:hover {
-  gap: 8px;
-  color: #4752c4;
+  gap: 10px;
+  color: #4c45b7;
+  background: #ecebff;
 }
 
 .card__link svg {
   width: 13px;
   height: 13px;
+}
+
+@media (max-width: 640px) {
+  .card__body {
+    padding: 20px;
+    gap: 16px;
+  }
 }
 </style>

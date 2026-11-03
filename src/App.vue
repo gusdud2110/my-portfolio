@@ -1,7 +1,22 @@
 <script setup>
+import { nextTick, onMounted } from 'vue'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 import { portfolioItems } from './data/portfolio'
 import PortfolioCard from './components/PortfolioCard.vue'
 import Introduction from './components/Introduction.vue'
+
+onMounted(async () => {
+  await nextTick()
+
+  AOS.init({
+    duration: 700,
+    easing: 'ease-out-cubic',
+    once: true,
+    offset: 80,
+  })
+  AOS.refreshHard()
+})
 </script>
 
 <template>
@@ -9,7 +24,7 @@ import Introduction from './components/Introduction.vue'
     <Introduction />
 
     <section class="portfolio">
-      <div class="portfolio__header">
+      <div class="portfolio__header" data-aos="fade-up">
         <h2 class="portfolio__title">PROJECT</h2>
       </div>
 
@@ -18,6 +33,7 @@ import Introduction from './components/Introduction.vue'
           v-for="(item, index) in portfolioItems"
           :key="index"
           :item="item"
+          :animation-delay="Math.min(index * 100, 400)"
         />
       </div>
     </section>
@@ -26,27 +42,39 @@ import Introduction from './components/Introduction.vue'
 
 <style scoped>
 .portfolio {
-  padding: 80px 40px 120px;
-  background: #f7f8fc;
+  padding: 96px 40px 120px;
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(99, 91, 255, 0.06), transparent 42%),
+    #f7f8fc;
   min-height: 100vh;
 }
 
 .portfolio__header {
   text-align: center;
-  margin-bottom: 52px;
+  margin-bottom: 56px;
+}
+
+.portfolio__header::before {
+  content: 'SELECTED WORK';
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #7169e8;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.4px;
 }
 
 .portfolio__title {
-  font-size: 32px;
+  font-size: clamp(28px, 3vw, 36px);
   font-weight: 800;
-  color: #111;
-  letter-spacing: -1px;
+  color: #1d2340;
+  letter-spacing: -1.4px;
   font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
 }
 
 .portfolio__title span {
   font-weight: 400;
-  color: #5865f2;
+  color: #7169e8;
   font-size: 22px;
   margin-left: 6px;
 }
@@ -54,15 +82,15 @@ import Introduction from './components/Introduction.vue'
 .portfolio__desc {
   margin-top: 10px;
   font-size: 14px;
-  color: #999;
+  color: #81889a;
   letter-spacing: -0.2px;
 }
 
 .portfolio__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  max-width: 1200px;
+  gap: 28px;
+  max-width: 1180px;
   margin: 0 auto;
 }
 
@@ -74,7 +102,7 @@ import Introduction from './components/Introduction.vue'
 
 @media (max-width: 640px) {
   .portfolio {
-    padding: 60px 20px 80px;
+    padding: 72px 20px 88px;
   }
 
   .portfolio__grid {
