@@ -1,4 +1,6 @@
 <script setup>
+const baseUrl = import.meta.env.BASE_URL
+
 const profile = {
   name: "김현영",
   career: "경력 9년 2개월",
@@ -67,7 +69,7 @@ const infoItems = [
       <!-- Profile image -->
       <div class="intro__photo-wrap" data-aos="fade-up">
         <div class="intro__photo">
-          <img src="/images/profile-image-2026.png" alt="프로필 이미지" />
+          <img :src="`${baseUrl}images/profile-image-2026.png`" alt="프로필 이미지" />
         </div>
         <div class="intro__photo-deco"></div>
       </div>
