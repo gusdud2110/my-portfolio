@@ -54,16 +54,6 @@ onMounted(async () => {
   margin-bottom: 56px;
 }
 
-.portfolio__header::before {
-  content: 'SELECTED WORK';
-  display: inline-block;
-  margin-bottom: 12px;
-  color: #7169e8;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2.4px;
-}
-
 .portfolio__title {
   font-size: clamp(28px, 3vw, 36px);
   font-weight: 800;
